@@ -1,7 +1,7 @@
 import Post from "../models/postModel.js";
 import User from "../models/userModel.js";
-import AppError from "../utils/AppError.js";
-import catchAsync from "../utils/catchAsync.js";
+import AppError from "../managers/AppError.js";
+import catchAsync from "../managers/catchAsync.js";
 import { addComment, addDocByUser, addLiker, deleteDoc, getAllDocs, getAllDocsByUser, getDoc, updateDoc } from "../utils/HandlerFactory.js";
 
 

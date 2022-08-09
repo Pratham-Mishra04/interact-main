@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import validator from "validator";
 import bcrypt from 'bcryptjs';
 import slugify from "slugify";
-import AppError from "../utils/AppError.js";
+import AppError from "../managers/AppError.js";
 
 const userSchema = new mongoose.Schema({
     //BASIC

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import AppError from "../utils/AppError.js";
+import AppError from "../managers/AppError.js";
 
 const commentSchema = new mongoose.Schema({
     user:{

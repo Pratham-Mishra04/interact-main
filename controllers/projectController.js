@@ -1,5 +1,5 @@
 import Project from "../models/projectModel.js";
-import catchAsync from "../utils/catchAsync.js";
+import catchAsync from "../managers/catchAsync.js";
 import User from "../models/userModel.js";
 import { addComment, addDocByUser, addLiker, deleteDoc, getAllDocs, getAllDocsByUser, getDoc, updateDoc } from "../utils/HandlerFactory.js";
 

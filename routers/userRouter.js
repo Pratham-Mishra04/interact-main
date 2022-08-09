@@ -3,10 +3,11 @@ import { signup, login, protect } from "../Controllers/authController.js";
 import { getAllUsers, UpdatePassword, getUser, updateUser, deleteUser, filterBody, forgotPassword, resetPassword, uploadProficPic, resizeUserPic, follow } from "../Controllers/userController.js";
 import postRouter from "./postRouter.js";
 import projectRouter from "./projectRouter.js";
+import { joiUserCreateValidator, joiUserUpdateValidator } from "../utils/joiValidator.js";
 
 const userRouter= express.Router()
 
-userRouter.post('/signup',signup)
+userRouter.post('/signup', joiUserCreateValidator, signup)
 userRouter.post('/login',login)
 
 userRouter.patch('/updatePassword', protect, UpdatePassword)
@@ -16,7 +17,7 @@ userRouter.post('/:userID/resetPassword/:token', resetPassword)
 userRouter.get('/', getAllUsers)
 userRouter.route('/:id')
 .get(protect, getUser)
-.patch(protect, uploadProficPic, resizeUserPic, filterBody, updateUser)
+.patch(protect, joiUserUpdateValidator, uploadProficPic, resizeUserPic, filterBody, updateUser)
 .delete(protect, deleteUser)
 
 userRouter.route('/follow').post(protect, follow)

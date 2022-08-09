@@ -1,7 +1,7 @@
-import catchAsync from "./catchAsync.js";
+import catchAsync from "../managers/catchAsync.js";
 import APIFeatures from "./APIFeatures.js"
 import User from "../models/userModel.js";
-import AppError from "./AppError.js";
+import AppError from "../managers/AppError.js";
 import Comment from "../models/commentModel.js";
 
 export const getAllDocs = Model => catchAsync(async (req, res, next)=>{
@@ -60,6 +60,15 @@ export const addDocByUser = Model => catchAsync(async (req, res, next)=>{
         status:"success",
         requestedAt: req.requestedAt,
         data:doc
+    })
+})
+
+export const createDoc = Model => catchAsync( async(req, res, next)=>{
+    const doc = await Model.create(req.body);
+    res.status(201).json({
+        status:"success",
+        requestedAt: req.requestedAt,
+        data: doc
     })
 })
 

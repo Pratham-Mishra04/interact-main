@@ -1,7 +1,7 @@
 import User from "../models/userModel.js";
-import AppError from "../utils/AppError.js";
-import catchAsync from "../utils/catchAsync.js";
-import { createSendToken, createToken } from "./authController.js";
+import AppError from "../managers/AppError.js";
+import catchAsync from "../managers/catchAsync.js";
+import { createSendToken } from "./authController.js";
 import { getAllDocs, getDoc, updateDoc, deleteDoc } from "../utils/HandlerFactory.js";
 import sendEmail from "../utils/Email.js";
 import resizePic from "../utils/resizePic.js";
@@ -16,7 +16,7 @@ const filterObj=(obj, ...fields)=>{
 }
 
 export const filterBody=(req, res, next)=>{
-    if(req.body.password || req.body.passwordConfirm) return next(new AppError("Password cannot be cahnged using this route."))
+    if(req.body.password || req.body.passwordConfirm) return next(new AppError("Password cannot be changed using this route."))
     const filteredBody=filterObj(req.body, 'username', 'email', 'name', 'age', 'phoneNo', 'bio', 'uniname', 'Gradyear', 'CourseName', 'cgpa');
     if(req.file) filteredBody.profilePic= req.file.filename;
     req.body=filteredBody;

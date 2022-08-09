@@ -9,7 +9,8 @@ const multerFilter = (req, file, cb)=>{
 
 const uploadPhoto = multer({
     storage: multerStrorage,
-    fileFilter: multerFilter
+    fileFilter: multerFilter,
+    limits:{fileSize:5*1024*1024}
 })
 
 const uploadPic= name => uploadPhoto.single(`${name}`)
