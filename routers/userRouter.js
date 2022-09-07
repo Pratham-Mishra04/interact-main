@@ -12,7 +12,7 @@ userRouter.post('/login',login)
 
 userRouter.patch('/updatePassword', protect, UpdatePassword)
 userRouter.post('/forgotPassword', forgotPassword)
-userRouter.post('/:userID/resetPassword/:token', resetPassword)
+userRouter.post('/resetPassword', resetPassword)
 
 userRouter.get('/', getAllUsers)
 userRouter.route('/:id')

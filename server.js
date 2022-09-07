@@ -1,5 +1,4 @@
 import app from './app.js';
-import mongoose from 'mongoose'
 import connectToDB from './managers/DB.js'
 import {uncaughtExceptionManager, unhandledRejectionManager} from './managers/baseErrorManager.js'
 

@@ -1,4 +1,6 @@
 import nodemailer from 'nodemailer'
+import path from 'path'
+import hbs from 'nodemailer-express-handlebars';
 
 const sendEmail = async values =>{
     
@@ -11,12 +13,26 @@ const sendEmail = async values =>{
         }
     });
 
+    const handlebarOptions= {
+        viewEngine: {
+            extName: ".handlebars",
+            partialsDir: path.resolve('./utils/email_templates'),
+            defaultLayout: false
+        },
+        viewPath: path.resolve('./utils/email_templates'),
+        extName: ".handlebars"
+    }
+
+    transporter.use('compile', hbs(handlebarOptions))
+
     const mailOptions= {
         from: `Some User`,
         to: values.email,
         subject: values.subject,
-        text: values.body
-        // html: options.html
+        template:'forgotPassword',
+        context:{
+            mainText:values.body
+        }
     };
 
     await transporter.sendMail(mailOptions)

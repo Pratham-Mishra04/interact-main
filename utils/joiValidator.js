@@ -13,15 +13,16 @@ const joiUserCreateSchema = Joi.object({
         const user= await User.find({username: value});
         if(user) return helper.message("User with this username already exists")
     }).required(),
+    age:Joi.number(),
     password:Joi.string().min(8).required(),
     confirmPassword: Joi.ref('password'),
     bio: Joi.string().max(50),
     phoneNo:Joi.string().custom((value, helper)=>{
         if(!isValidNumber(value)) return helper.message("Enter a valid phone number")
     }),
-    uniName: Joi.string().max(25).required(),
-    Gradyear: Joi.date().required(),
-    CourseName: Joi.string.max(30),
+    uniName: Joi.string().max(25),
+    gradYear: Joi.date(),
+    CourseName: Joi.string().max(30),
     cgpa: Joi.number(),
     active: Joi.forbidden(),
     admin: Joi.forbidden(),
@@ -45,8 +46,8 @@ const joiUserUpdateSchema =Joi.object({
         if(!isValidNumber(value)) return helper.message("Enter a valid phone number")
     }),
     uniName: Joi.string().max(25),
-    Gradyear: Joi.date(),
-    CourseName: Joi.string.max(30),
+    gradYear: Joi.date(),
+    CourseName: Joi.string().max(30),
     cgpa: Joi.number(),
     active: Joi.forbidden(),
     admin: Joi.forbidden(),

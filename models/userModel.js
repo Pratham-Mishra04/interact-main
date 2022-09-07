@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import validator from "validator";
 import bcrypt from 'bcryptjs';
 import slugify from "slugify";
+import crypto from 'crypto';
 import AppError from "../managers/AppError.js";
 
 const userSchema = new mongoose.Schema({
@@ -60,7 +61,7 @@ const userSchema = new mongoose.Schema({
     },
     //ACADEMIC
     uniName:String,
-    Gradyear:Date,
+    gradYear:Date,
     CourseName:String,
     cgpa:Number,
     typeOfProfile:{

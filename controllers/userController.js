@@ -77,7 +77,7 @@ export const forgotPassword= catchAsync(async (req, res, next)=>{
     const resetToken=await user.createPasswordResetToken()
     await user.save({validateBeforeSave: false});
 
-    const URL= `${req.protocol}://${req.get('host')}/users/${user.id}/resetPassword/${resetToken}`;
+    const URL= `${req.protocol}://${req.get('host')}/resetPassword/${user.id}/${resetToken}`;
     const EmailSubject=`Reset your Password!`;
     const EmailBody= `Forgot your Password? Click here to reset: ${URL}`;
     try{
@@ -101,11 +101,11 @@ export const forgotPassword= catchAsync(async (req, res, next)=>{
 })
 
 export const resetPassword= catchAsync(async (req, res, next)=>{
-    const user= await User.findOne({_id:req.params.userID});
+    const user= await User.findOne({_id:req.body.userID});
     if(!user) return next(new AppError("Invalid URL", 401));
 
     if(!user.passwordResetToken || user.resetTokenExpired()) return next(new AppError("URL has Expired", 401));
-    if(!user.correctPasswordResetToken(req.params.token, user.passwordResetToken)) return next(new AppError("Invalid URL", 401));
+    if(!user.correctPasswordResetToken(req.body.token, user.passwordResetToken)) return next(new AppError("Invalid URL", 401));
     
     user.password=req.body.password;
     user.confirmPassword=req.body.passwordConfirm;
